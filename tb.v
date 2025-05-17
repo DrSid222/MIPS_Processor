@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 04/07/2025 02:50:20 PM
-// Design Name:
-// Module Name: cpu_tb
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
 module CPU_tb;
     reg clk;
     reg ex;
@@ -39,10 +19,8 @@ module CPU_tb;
     // Clock Generation
     always #10 clk = ~clk;
     initial begin
-      // $monitor("PC: %d, branch: %b, ALU_out: %d", uut.PC, uut.branch, uut.ALU_out);
-
-      // I am going to implement insertion sort of array of 10 elements
-      // Load the numbers in data memory at address 0 to 9
+      // This code implements insertion sort of 10 numbers
+      // Loading the numbers in data memory at address 0 to 9
 
         uut.data_mem.Address_locations[0] = 30;
         uut.data_mem.Address_locations[1] = 69;
@@ -55,7 +33,7 @@ module CPU_tb;
         uut.data_mem.Address_locations[8] = 12;
         uut.data_mem.Address_locations[9] = 19;
 
-        // $monitor("immediate: %b, rt: %d", uut.immediate, uut.RAM.Registers[18]);
+      
         clk = 0;
         ex=0;
         address = 0;
@@ -66,14 +44,7 @@ module CPU_tb;
         #10;
         // Write the addi instruction to instruction memory at address 0
         write_instruction = 1;
-        // $1 ---------> n
-        // $2 ---------> i
-        // $3 ---------> a[i]
-        // $4 ---------> j
-        // $5 ---------> a[j]
-        // $6 ---------> key
-        // $monitor("i: %d, n: %d, a[i]: %d, j: %d, a[j]: %d", uut.RAM.Registers[2], uut.RAM.Registers[1], uut.RAM.Registers[3], uut.RAM.Registers[4], uut.RAM.Registers[5]);
-        // $monitor("PC: %d, branch: %b, ALU_out: %d, i: %d, j: %d", uut.PC, uut.branch, uut.ALU_out, uut.RAM.Registers[2], uut.RAM.Registers[4]);
+       
         address = 0;
         // addi $1, $0, 10  ---> initialize n = 10
         inst_data = 32'b001000_00000_00001_0000_0000_0000_1010;
@@ -153,18 +124,6 @@ module CPU_tb;
         ex = 1;
         write_instruction = 0;
         #60000;
-        // Check output
-//        // $display("1111111111111111 = %d", $signed(16'b1111111111111111));
-//        $display("Register $1 value = %d", $signed(uut.RAM.Registers[1]));
-//        $display("Register $2 value = %d", $signed(uut.RAM.Registers[2]));
-//        $display("Register $3 value = %d", $signed(uut.RAM.Registers[3]));
-//        $display("Register $4 value = %d", $signed(uut.RAM.Registers[4]));
-//        $display("Register $5 value = %d", $signed(uut.RAM.Registers[5]));
-//        $display("Register $6 value = %d", $signed(uut.RAM.Registers[6]));
-//        $display("Register $7 value = %d", $signed(uut.RAM.Registers[7]));
-//        $display("Register $8 value = %d", $signed(uut.RAM.Registers[8]));
-//        $display("Register $9 value = %d", $signed(uut.RAM.Registers[9]));
-        // display array
         $display("Array values:");
         for (integer i = 0; i < 10; i = i + 1) begin
             $display("a[%0d] = %d", i, uut.data_mem.Address_locations[i]);
